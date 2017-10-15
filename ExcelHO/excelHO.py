@@ -20,7 +20,7 @@ print(listb)
 '''
 
 
-s="=Summe("
+s="=SUM("
 
 for j in range(15, 100):
     e=mysheet.cell(row=j, column=4)
@@ -33,7 +33,7 @@ s2+=")"
 mysheet["C8"]=s2
 
 print(mysheet["C8"].value)
-#now still need to add the celllocation and "Summe()"
+
 
 
 wb.save('Finanzen 2017_Test.xlsx')
