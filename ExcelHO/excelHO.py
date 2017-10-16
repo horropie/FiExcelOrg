@@ -6,9 +6,6 @@ mysheet=wb.get_sheet_by_name("Juni")
 #    for cell in col:
 #        if mysheet[str(cell)].value==
 
-def exists(it):
-    return (it is not None)
-
 '''
 listb=[]
 for j in range(15, 100):
@@ -18,7 +15,6 @@ for j in range(15, 100):
 
 print(listb)
 '''
-
 #the following is quite ugly rn and definitely should be shorter
 
 s="=SUM("
@@ -118,6 +114,12 @@ print(mysheet["C11"].value)
 print(mysheet["C12"].value)
 print(mysheet["C13"].value)
 print(mysheet["C14"].value)
+
+
+if "mensa" in mysheet["B22"].value:
+    print("Nice")
+
+
 
 
 wb.save('Finanzen 2017_Test.xlsx')
