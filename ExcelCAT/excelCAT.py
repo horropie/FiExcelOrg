@@ -129,9 +129,12 @@ s2+=")"
 mysheet["C14"]=s2
 
 #-------------------------------------------------------------------------------
+
 #would be nicer to have several loops in a loop with "else" for "Sonstiges"
 #furthermore a custom-function containing all the bs would be nice
+
 #-------------------------------------------------------------------------------
+'''
 print(mysheet["C7"].value)
 print(mysheet["C8"].value)
 print(mysheet["C9"].value)
@@ -140,5 +143,6 @@ print(mysheet["C11"].value)
 print(mysheet["C12"].value)
 print(mysheet["C13"].value)
 print(mysheet["C14"].value)
+'''
 #-------------------------------------------------------------------------------
 wb.save('Finanzen 2017_Test.xlsx')
