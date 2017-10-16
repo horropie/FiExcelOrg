@@ -12,6 +12,20 @@ mysheet=wb.get_sheet_by_name("Juni")
 
 #-------------------------------------------------------------------------------
 
+def categorizer_col(cell, *list, rangestart=15, rangeend=150, column=2, inp="C"):
+    s="=SUM("
+    for j in range(rangestart, rangeend):
+        e=mysheet.cell(row=j, column)
+        if type(e.value) is str:
+            mysheet[cell]=s
+            if e.value in str(*list):
+                s+=inp + str(j)+","
+    s2=s
+    s2+=")"
+    mysheet[cell]=s2
+
+#-------------------------------------------------------------------------------
+
 Unterkunft_trigger=["unt.", "Miete", "miete"]
 Lebensmittel_trigger=["lem.","Aldi", "aldi", "Lidl", "lidl", "tegut", "Tegut", "Bäcker", "Backwerk", "Bioladen", "bioladen",
 "Brezen", "Semmel", "Brot",]
@@ -26,6 +40,12 @@ Sonstiges_trigger=["son.", "Kopierer", "kopierer", "Block", "Waschen", "Drucken"
 #the following is quite ugly rn and definitely should be shorter
 #-------------------------------------------------------------------------------
 
+categorizer_col("C7", Unterkunft_trigger)
+print(mysheet["C7"].value)
+
+#-------------------------------------------------------------------------------
+
+'''
 s="=SUM("
 for j in range(15, 150):
     e=mysheet.cell(row=j, column=2)
@@ -134,7 +154,7 @@ mysheet["C14"]=s2
 #furthermore a custom-function containing all the bs would be nice
 
 #-------------------------------------------------------------------------------
-'''
+
 print(mysheet["C7"].value)
 print(mysheet["C8"].value)
 print(mysheet["C9"].value)
@@ -143,6 +163,7 @@ print(mysheet["C11"].value)
 print(mysheet["C12"].value)
 print(mysheet["C13"].value)
 print(mysheet["C14"].value)
-'''
+
 #-------------------------------------------------------------------------------
-wb.save('Finanzen 2017_Test.xlsx')
+'''
+wb.save('Finanzen 2017_Func.xlsx')
