@@ -7,6 +7,9 @@ This only categorizes the cells and sums them up.
 
 import openpyxl
 from operator import is_not
+from openpyxl.styles import Color, PatternFill, Font, Border
+from openpyxl.styles import colors
+from openpyxl.cell import Cell
 wb=openpyxl.load_workbook("Finanzen 2017.xlsx")
 mysheet=wb.get_sheet_by_name("Juni")
 
@@ -28,13 +31,30 @@ Sonstiges_trigger=["son.", "Kopierer", "kopierer", "Block", "Waschen", "Drucken"
 
 
 #-------------------------------------------------------------------------------
-print(mysheet['B7'].fill.start_color.index)
-myshet['C8'].style = Style(fill=PatternFill(patternType='solid',
-                                        fill_type='solid',
-                                        fgColor=Color('FFD9E2F3')))
-print(mysheet['C8'].fill.start_color.index)
+fillvar=mysheet['B7'].fill.start_color.index
+print(fillvar)
+#myshet['C8'].style = style(fill=PatternFill(patternType='solid',
+#                                        fill_type='solid',
+#                                        fgColor=Color('FFD9E2F3')))
+customFill = PatternFill(start_color=str(fillvar),
+                   end_color=str(fillvar),
+                   fill_type='solid')
+mysheet['C7'].fill = customFill
+
+print(mysheet['C7'].fill.start_color.index)
 #-------------------------------------------------------------------------------
 
+def readfromfillto(fromcell, tocell):
+    fillvar=mysheet[str(fromcell)].fill.start_color.index
+    customFill = PatternFill(start_color=fillvar,
+                       end_color=fillvar,
+                       fill_type='solid')
+    mysheet[str(tocell)].fill = customFill
+
+readfromfillto('B7','C7')
+
+print(mysheet['C7'].fill.start_color.index)
+#-------------------------------------------------------------------------------
 s="=SUM("
 for j in range(15, 100):
     e=mysheet.cell(row=j, column=2)
@@ -42,10 +62,12 @@ for j in range(15, 100):
         mysheet["C9"]=s
         if e.value in str(Restaurant_trigger):
             s+="C"+str(j)+","
+            readfromfillto('B9',e)
 s2=s
 s2+=")"
 mysheet["C9"]=s2
 
+print(mysheet['B22'].fill.start_color.index)
 #-------------------------------------------------------------------------------
 
 s="=SUM("
