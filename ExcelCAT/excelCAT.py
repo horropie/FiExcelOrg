@@ -26,16 +26,6 @@ Sonstiges_trigger=["son.", "Kopierer", "kopierer", "Block", "Waschen", "Drucken"
 #the following is quite ugly rn and definitely should be shorter
 #-------------------------------------------------------------------------------
 
-s="=SUM("
-for j in range(15, 150):
-    e=mysheet.cell(row=j, column=2)
-    if type(e.value) is str:
-        mysheet["C7"]=s
-        if e.value in str(Unterkunft_trigger):
-            s+="C"+str(j)+","
-s2=s
-s2+=")"
-mysheet["C7"]=s2
 
 #-------------------------------------------------------------------------------
 
